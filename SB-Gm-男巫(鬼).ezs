@@ -63,14 +63,14 @@ ExtVar[0]=67
 //====随机目标(便于拉怪)====
 //随机1~N个目标
 //0为关闭(只选择自己)
-ExtVar[99]=9
+ExtVar[9]=9
 
 
 //==========================
 // 开始
 //==========================
 
-ExtVar[99]=ExtVar[99]-1
+ExtVar[9]=ExtVar[9]-1
 
 //====主进程====
 Main:
@@ -138,8 +138,8 @@ Return
 
 //随机目标
 RandomTarget:
-if ExtVar[99]>-1 then
-Repeat Rand[ExtVar[99]]+1
+if ExtVar[9]>-1 then
+Repeat Rand[ExtVar[9]]+1
 SendKey(38)
 Delay(50)
 End Repeat
