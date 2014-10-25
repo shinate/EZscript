@@ -138,8 +138,8 @@ Return
 
 //Ëæ»úÄ¿±ê
 RandomTarget:
-if ExtVar[9]>-1 then
-Repeat Rand[ExtVar[9]]+1
+if ExtVar[99]>-1 then
+Repeat Rand[ExtVar[99]]+1
 SendKey(38)
 Delay(50)
 End Repeat
