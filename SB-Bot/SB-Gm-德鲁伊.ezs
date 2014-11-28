@@ -36,21 +36,25 @@ pos8=
 //==========================
 
 //====时间设置====
-
-//大药计时
-
 //大药持续时间(秒)
 ExtVar[11]=3000
-
 //姿势&buff持续时间(秒)
 ExtVar[12]=1700
+//橡树皮肤计时(秒)
+ExtVar[13]=300
+//追踪
+ExtVar[19]=30
 
 //====姿势设置====
 //67:进攻姿势
 //86:精确姿势
 //66:防御姿势
 //默认为进攻姿势
-ExtVar[0]=67
+ExtVar[31]=67
+
+//====按键设置====
+//追踪
+ExtVar[32]=68
 
 //====随机目标(便于拉怪)====
 //随机1~N个目标
@@ -64,6 +68,13 @@ ExtVar[21]=9
 
 ExtVar[1]=0
 ExtVar[2]=0
+ExtVar[3]=0
+ExtVar[4]=0
+ExtVar[5]=0
+ExtVar[6]=0
+ExtVar[7]=0
+ExtVar[8]=0
+ExtVar[9]=0
 ExtVar[21]=ExtVar[21]-1
 
 //====主进程====
@@ -73,7 +84,11 @@ Call BuffMedicine
 
 Call BuffPosture
 
+Call BuffTree
+
 Call Attack
+
+Call Scan
 
 Jump Main
 
@@ -121,13 +136,31 @@ BuffPosture:
 if ExtVar[12]>0 && Time-ExtVar[2]>ExtVar[12] then
 SendKey(88)
 Delay(1000)
-SendKey(ExtVar[0])
+SendKey(ExtVar[31])
 Delay(3000)
 SendKey(88)
 Delay(1000)
 SendKey(118)
 Delay(4500)
 ExtVar[2]=Time
+end if
+Return
+
+//橡树皮肤
+BuffTree:
+if ExtVar[13]>0 && Time-ExtVar[3]>ExtVar[13] then
+SendKey(119)
+Delay(1000)
+ExtVar[3]=Time
+end if
+Return
+
+//追踪
+Scan:
+if ExtVar[19]>0 && Time-ExtVar[9]>ExtVar[19] then
+SendKey(ExtVar[32])
+Delay(1000)
+ExtVar[9]=Time
 end if
 Return
 
