@@ -1,0 +1,41 @@
+[variable]
+var1=
+var2=
+var3=
+var4=
+var5=
+var6=
+var7=
+var8=
+pos1=
+pos2=
+pos3=
+pos4=
+pos5=
+pos6=
+pos7=
+pos8=
+[script]
+SendChar @alootid reset
+SendKey(13)
+SendChar @alootid +603
+SendKey(13)
+SendChar @alootid +617
+SendKey(13)
+SendChar @alootid +1901
+SendKey(13)
+SendChar @alootid +1720
+SendKey(13)
+SendChar @alootid +1417
+SendKey(13)
+SendChar @alootid +1951
+SendKey(13)
+SendChar @alootid +1365
+SendKey(13)
+SendChar @alootid +1552
+SendKey(13)
+SendChar @alootid +1614
+SendKey(13)
+SendChar @alootid +1255
+SendKey(13)
+Stop

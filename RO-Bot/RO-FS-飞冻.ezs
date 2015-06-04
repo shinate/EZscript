@@ -1,0 +1,42 @@
+[variable]
+var1=
+var2=
+var3=
+var4=
+var5=
+var6=
+var7=
+var8=
+pos1=
+pos2=
+pos3=
+pos4=
+pos5=
+pos6=
+pos7=
+pos8=
+[script]
+ExtVar[1]=Time
+
+//====Ö÷½ø³Ì====
+Main:
+
+Call Attack
+
+if Time-ExtVar[1] > 580 then
+Stop
+Else
+Jump Main
+End if
+
+End:
+WaitKey
+return
+
+//¹¥»÷
+Attack:
+SendKey(120)
+delay(1000)
+SendKey(119)
+delay(1000)
+Return

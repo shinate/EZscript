@@ -1,0 +1,52 @@
+[variable]
+var1=
+var2=
+var3=
+var4=
+var5=
+var6=
+var7=
+var8=
+pos1=
+pos2=
+pos3=
+pos4=
+pos5=
+pos6=
+pos7=
+pos8=
+[script]
+ExtVar[1]=0
+
+Main:
+Call Fly
+Call Attack
+Call Eat
+Jump Main
+
+Attack:
+ExtVar[2]=1000+Rand[500]
+Delay(ExtVar[2])
+SendKey(119)
+ExtVar[3]=Rand[3]
+if(ExtVar[3]=0) then
+ExtVar[2]=1000+Rand[500]
+Delay(ExtVar[2])
+SendKey(118)
+end if
+ExtVar[2]=1000+Rand[1000]
+Delay(ExtVar[2])
+ExtVar[1]=ExtVar[1]+1
+Return
+
+Eat:
+if(ExtVar[1]>40) then
+SendKey(117)
+Delay(1000)
+ExtVar[1]=0
+end if
+Return
+
+Fly:
+SendKey(120)
+Return
