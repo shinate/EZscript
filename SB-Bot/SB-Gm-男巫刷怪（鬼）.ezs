@@ -62,11 +62,11 @@ ExtVar[30]=5
 //==========================
 //初始化
 //大药计时器
-ExtVar[100]=0
+var1=0
 //姿势buff计时器
-ExtVar[101]=0
+var2=0
 //飞行计时器
-ExtVar[102]=0
+var3=0
 
 ExtVar[30]=ExtVar[30]-1
 
@@ -82,30 +82,30 @@ Return
 
 //飞行
 BuffFly:
-if ExtVar[22]>0 && Time-ExtVar[102]>ExtVar[22] then
+if ExtVar[22]>0 && Time-var3>ExtVar[22] then
 SendKey(ExtVar[8])
 Delay(9000)
-ExtVar[102]=Time
+var3=Time
 end if
 Return
 
 //大药
 BuffMedicine:
-if ExtVar[20]>0 && Time-ExtVar[100]>ExtVar[20] then
+if ExtVar[20]>0 && Time-var1>ExtVar[20] then
 SendKey(ExtVar[9])
-Delay(10000)
-ExtVar[100]=Time
+Delay(12000)
+var1=Time
 end if
 Return
 
 //姿势 & buff
 BuffPosture:
-if ExtVar[21]>0 && Time-ExtVar[101]>ExtVar[21] then
+if ExtVar[21]>0 && Time-var2>ExtVar[21] then
 SendKey(ExtVar[7])
 Delay(5000)
 SendKey(ExtVar[3])
 Delay(3000)
-ExtVar[101]=Time
+var2=Time
 end if
 Return
 
@@ -129,7 +129,7 @@ Return
 Attack:
 Call TargetSelf
 Call RandomTarget
-//SendKey(ExtVar[4])
+SendKey(ExtVar[4])
 Delay(6000)
 SendKey(ExtVar[5])
 Delay(4000)
