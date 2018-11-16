@@ -1,9 +1,9 @@
 [variable]
-var1=1541438051
-var2=1541438029
-var3=1541438071
-var4=1541438056
-var5=1541438061
+var1=
+var2=
+var3=
+var4=
+var5=
 var6=
 var7=
 var8=
@@ -18,8 +18,8 @@ pos8=
 [script]
 //==========================
 // F.H.D - 光芒
-// 牧师(高防)
-// 2018-10-26
+// 鸟牧师(高防起飞)
+// 2018-11-08
 //==========================
 
 //==== 键位设置 >>> ====
@@ -163,8 +163,10 @@ Return
 //默认循环流程
 Attack:
 Call TargetSelf
+SendKey(ExtVar[31])
+Delay(1000)
 SendKey(ExtVar[9])
 Delay(2000)
 SendKey(ExtVar[12])
-Delay(13000)
+Delay(12000)
 Return
