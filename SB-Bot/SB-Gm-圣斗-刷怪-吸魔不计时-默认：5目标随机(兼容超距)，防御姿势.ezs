@@ -1,0 +1,182 @@
+[variable]
+var1=1543198580
+var2=1543198582
+var3=1543198583
+var4=0
+var5=
+var6=
+var7=
+var8=
+pos1=
+pos2=
+pos3=
+pos4=
+pos5=
+pos6=
+pos7=
+pos8=
+[script]
+//==========================
+// F.H.D - 光芒
+// 圣斗士(高防)
+// 2018-11-20
+//==========================
+
+//==== 键位设置 >>> ====
+// C:67 选择目标（NPC）
+ExtVar[0]=67
+// Q:81选择自己
+ExtVar[1]=81
+// X:88 开/关姿势
+ExtVar[2]=88
+// F5:116 进攻姿势
+ExtVar[3]=116
+// F6:117 精确姿势
+ExtVar[4]=117
+// F7:118 防御姿势
+ExtVar[5]=118
+// F8:119 正常姿势
+ExtVar[6]=119
+// F12:123 大药
+ExtVar[7]=123
+// F9:120 武神力量
+ExtVar[8]=120
+// F4:115 符石加血
+ExtVar[9]=115
+// F1:112 吸魔
+ExtVar[10]=112
+// F2:113 减抗
+ExtVar[11]=113
+// F3:114 小爆
+ExtVar[12]=114
+// T:84 追踪
+ExtVar[19]=84
+//==== <<< 键位设置 ====
+
+//==== 时间设置 >>> ====
+//大药持续时间(秒)
+ExtVar[20]=3500
+//姿势持续时间(秒)
+ExtVar[21]=1700
+//武神力量持续时间(秒)
+ExtVar[22]=840
+//吸魔CD时间
+ExtVar[23]=30
+//==== <<< 时间设置 ====
+
+//==== 其他设置 >>> ====
+//随机目标，随机1~N个目标，0为关闭(只选择自己)
+ExtVar[30]=5
+//3:进攻姿势, 4:精确姿势, 5:防御姿势, 6:正常姿势
+//默认为正常姿势
+ExtVar[31]=ExtVar[5]
+//==== <<< 其他设置 ====
+
+//==========================
+//初始化
+//大药计时器
+var1=0
+//姿势计时器
+var2=0
+//武神力量计时器
+var3=0
+//吸魔计时器
+var4=0
+
+ExtVar[30]=ExtVar[30]-1
+
+//==== 主进程 >>> ====
+Main:
+Call BuffMedicine
+Call BuffPosture
+Call BuffSkill
+Call ManaDrain
+Call Attack
+Jump Main
+Return
+//==== <<< 主进程 ====
+
+//武神力量
+BuffSkill:
+if ExtVar[22]>0 && Time-var3>ExtVar[22] then
+SendKey(ExtVar[8])
+Delay(1000)
+var3=Time
+end if
+Return
+
+//大药
+BuffMedicine:
+if ExtVar[20]>0 && Time-var1>ExtVar[20] then
+SendKey(ExtVar[5])
+Delay(3000)
+SendKey(ExtVar[7])
+Delay(15000)
+SendKey(ExtVar[31])
+Delay(3000)
+var1=Time
+end if
+Return
+
+//姿势
+BuffPosture:
+if ExtVar[21]>0 && Time-var2>ExtVar[21] then
+SendKey(ExtVar[31])
+Delay(1000)
+var2=Time
+end if
+Return
+
+//吸魔拉怪
+ManaDrain:
+//if ExtVar[23]>0 && Time-var4>ExtVar[23] then
+Call RandomTarget
+SendKey(ExtVar[10])
+Delay(50)
+Call NearlyTarget
+SendKey(ExtVar[10])
+Delay(3000)
+//var4=Time
+//end if
+Return
+
+//选择自己
+TargetSelf:
+SendKey(ExtVar[1])
+Delay(50)
+Return
+
+//随机目标
+RandomTarget:
+if ExtVar[30]>-1 then
+Repeat Rand[ExtVar[30]]+1
+SendKey(ExtVar[0])
+Delay(50)
+End Repeat
+end if
+Return
+
+//就近目标
+NearlyTarget:
+SendKey(ExtVar[1])
+Delay(50)
+SendKey(ExtVar[0])
+Delay(50)
+Return
+
+//攻击
+Attack:
+SendKey(ExtVar[19])
+Delay(50)
+SendKey(ExtVar[31])
+Delay(1000)
+Call TargetSelf
+SendKey(ExtVar[9])
+Delay(3000)
+SendKey(ExtVar[9])
+Delay(3000)
+SendKey(ExtVar[11])
+Delay(4000)
+SendKey(ExtVar[12])
+Delay(6000)
+Return
