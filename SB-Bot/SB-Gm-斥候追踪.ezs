@@ -1,0 +1,125 @@
+[variable]
+var1=
+var2=
+var3=
+var4=
+var5=
+var6=
+var7=
+var8=
+pos1=
+pos2=
+pos3=
+pos4=
+pos5=
+pos6=
+pos7=
+pos8=
+[script]
+//==========================
+// F.H.D - 光芒
+// 斥候追踪
+// 2019-02-26
+//==========================
+
+//==== 键位设置 >>> ====
+// C:67 选择目标（NPC）
+ExtVar[0]=67
+// Q:81选择自己
+ExtVar[1]=81
+// X:88 开/关姿势
+ExtVar[2]=88
+// F5:116 进攻姿势
+ExtVar[3]=116
+// F6:117 精确姿势
+ExtVar[4]=117
+// F7:118 防御姿势
+ExtVar[5]=118
+// F8:119 正常姿势
+ExtVar[6]=119
+// F12:123 大药
+ExtVar[7]=123
+// F1:112 单体小回血
+ExtVar[8]=112
+// F2:113 群体治疗
+ExtVar[9]=113
+// F3:114 单体持续回血
+ExtVar[10]=114
+// F4:115 群体持续回血
+ExtVar[11]=115
+// 方向键(上):38 向上飞一格
+ExtVar[12]=38
+// 1:49 单回耐
+ExtVar[13]=49
+// 2:50 群回耐
+ExtVar[14]=50
+//==== <<< 键位设置 ====
+
+//==== 时间设置 >>> ====
+//大药持续时间(秒)
+ExtVar[20]=3500
+//姿势 & buff持续时间(秒)
+ExtVar[21]=1700
+//持续加血时间(秒)
+ExtVar[22]=20
+//单回耐CD时间(秒)
+ExtVar[23]=180
+//群回耐CD间(秒)
+ExtVar[24]=540
+//==== <<< 时间设置 ====
+
+//==== 其他设置 >>> ====
+//3:进攻姿势, 4:精确姿势, 5:防御姿势, 6:正常姿势
+//默认为正常姿势
+ExtVar[31]=ExtVar[5]
+//==== <<< 其他设置 ====
+
+//==========================
+//初始化
+//大药计时器
+var1=0
+//姿势buff计时器
+var2=0
+//持续加血计时器
+var3=0
+//单回耐计时器
+var4=0
+//群回耐计时器
+var5=Time
+
+//==== 主进程 >>> ====
+Main:
+Call BuffPosture
+Call BuffMedicine
+Call Attack
+Jump Main
+Return
+//==== <<< 主进程 ====
+
+//大药
+BuffMedicine:
+if ExtVar[20]>0 && Time-var1>ExtVar[20] then
+SendKey(ExtVar[5])
+Delay(3000)
+SendKey(ExtVar[7])
+Delay(15000)
+SendKey(ExtVar[31])
+Delay(3000)
+var1=Time
+end if
+Return
+
+//姿势
+BuffPosture:
+if ExtVar[21]>0 && Time-var2>ExtVar[21] then
+SendKey(ExtVar[31])
+Delay(3000)
+var2=Time
+end if
+Return
+
+//默认循环流程
+Attack:
+SendKey(84)
+Delay(10000)
+Return
