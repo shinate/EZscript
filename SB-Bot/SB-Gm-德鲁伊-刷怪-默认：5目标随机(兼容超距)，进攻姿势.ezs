@@ -1,7 +1,7 @@
 [variable]
-var1=
-var2=
-var3=
+var1=1592293695
+var2=1592293706
+var3=1592293707
 var4=
 var5=
 var6=
@@ -76,7 +76,7 @@ ExtVar[31]=ExtVar[3]
 //初始化
 //大药计时器
 var1=0
-//姿势buff计时器
+//姿势计时器
 var2=0
 //橡树皮肤计时器
 var3=0
@@ -105,8 +105,12 @@ Return
 //大药
 BuffMedicine:
 if ExtVar[20]>0 && Time-var1>ExtVar[20] then
+SendKey(ExtVar[2])
+Delay(1000)
 SendKey(ExtVar[5])
 Delay(3000)
+SendKey(ExtVar[2])
+Delay(1000)
 SendKey(ExtVar[7])
 Delay(15000)
 SendKey(ExtVar[31])
@@ -115,13 +119,17 @@ var1=Time
 end if
 Return
 
-//姿势 & buff
+//姿势
 BuffPosture:
 if ExtVar[21]>0 && Time-var2>ExtVar[21] then
 SendKey(ExtVar[8])
 Delay(5000)
+SendKey(ExtVar[2])
+Delay(1000)
 SendKey(ExtVar[31])
 Delay(3000)
+SendKey(ExtVar[2])
+Delay(1000)
 var2=Time
 end if
 Return
