@@ -1,0 +1,105 @@
+[variable]
+var1=55
+var2=
+var3=
+var4=
+var5=
+var6=
+var7=
+var8=
+pos1=
+pos2=
+pos3=
+pos4=
+pos5=
+pos6=
+pos7=
+pos8=
+[script]
+
+//==== ¼üÎ»ÉèÖÃ >>> ====
+var1=55
+ExtVar[0]=53
+ExtVar[10]=1000
+ExtVar[1]=54
+ExtVar[11]=4000
+ExtVar[2]=0
+ExtVar[12]=0
+ExtVar[3]=0
+ExtVar[13]=0
+ExtVar[4]=0
+ExtVar[14]=0
+ExtVar[5]=0
+ExtVar[15]=0
+ExtVar[6]=0
+ExtVar[16]=0
+ExtVar[7]=0
+ExtVar[17]=0
+ExtVar[8]=0
+ExtVar[18]=0
+ExtVar[9]=0
+ExtVar[19]=0
+
+Main:
+
+if var1!=0 then
+    SendKey(var1)
+    Delay(5000)
+else
+    Delay(5000)
+    Jump Main
+end if
+
+if ExtVar[0]>0 && ExtVar[10]>0 then
+    SendKey(ExtVar[0])
+    Delay(ExtVar[10])
+end if
+
+if ExtVar[1]>0 && ExtVar[11]>0 then
+    SendKey(ExtVar[1])
+    Delay(ExtVar[11])
+end if
+
+if ExtVar[2]>0 && ExtVar[12]>0 then
+    SendKey(ExtVar[2])
+    Delay(ExtVar[12])
+end if
+
+if ExtVar[3]>0 && ExtVar[13]>0 then
+    SendKey(ExtVar[3])
+    Delay(ExtVar[13])
+end if
+
+if ExtVar[4]>0 && ExtVar[14]>0 then
+    SendKey(ExtVar[4])
+    Delay(ExtVar[14])
+end if
+
+if ExtVar[5]>0 && ExtVar[15]>0 then
+    SendKey(ExtVar[5])
+    Delay(ExtVar[15])
+end if
+
+if ExtVar[6]>0 && ExtVar[16]>0 then
+    SendKey(ExtVar[6])
+    Delay(ExtVar[16])
+end if
+
+if ExtVar[7]>0 && ExtVar[17]>0 then
+    SendKey(ExtVar[7])
+    Delay(ExtVar[17])
+end if
+
+if ExtVar[8]>0 && ExtVar[18]>0 then
+    SendKey(ExtVar[8])
+    Delay(ExtVar[18])
+end if
+
+if ExtVar[9]>0 && ExtVar[19]>0 then
+    SendKey(ExtVar[9])
+    Delay(ExtVar[19])
+end if
+
+Jump Main
+Return
+
