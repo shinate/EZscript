@@ -1,5 +1,5 @@
 [variable]
-var1=55
+var1=81
 var2=
 var3=
 var4=
@@ -18,23 +18,26 @@ pos8=
 [script]
 
 //==== 键位设置 >>> ====
-// 清除目标选择，默认为 Q:81，可设置为任何其他键，建议不要用组合键
+// Q:清除目标
 var1=81
-
-// buff键位及释放时间，必须成对设置，任何一项为0时，此项buff无效
-// ExtVar[n] 为技能按键 ExtVar[1n] 为技能对应的释放时间（毫秒）
-ExtVar[0]=0
-ExtVar[10]=0
-ExtVar[1]=0
-ExtVar[11]=0
-ExtVar[2]=0
-ExtVar[12]=0
-ExtVar[3]=0
-ExtVar[13]=0
-ExtVar[4]=0
-ExtVar[14]=0
-ExtVar[5]=0
-ExtVar[15]=0
+// F1
+ExtVar[0]=112
+ExtVar[10]=1000
+// F2
+ExtVar[1]=113
+ExtVar[11]=1000
+// F3
+ExtVar[2]=114
+ExtVar[12]=1000
+// F4
+ExtVar[3]=115
+ExtVar[13]=1000
+// F5
+ExtVar[4]=116
+ExtVar[14]=4000
+// F6
+ExtVar[5]=117
+ExtVar[15]=4000
 ExtVar[6]=0
 ExtVar[16]=0
 ExtVar[7]=0
