@@ -1,0 +1,23 @@
+[variable]
+var1=4342338
+var2=
+var3=
+var4=
+var5=
+var6=
+var7=
+var8=
+pos1=20251159
+pos2=
+pos3=
+pos4=
+pos5=
+pos6=
+pos7=
+pos8=
+[script]
+if Color[Pos1]=Var1 then
+SendKey(119)
+else
+Delay(500)
+end if

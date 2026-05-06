@@ -1,0 +1,33 @@
+[variable]
+var1=-1
+var2=
+var3=
+var4=
+var5=
+var6=
+var7=
+var8=
+pos1=18940587
+pos2=21889533
+pos3=
+pos4=
+pos5=
+pos6=
+pos7=
+pos8=
+[script]
+MouseMove Pos1
+Delay(1000)
+SendKey(82)
+Delay(500)
+Left Click Pos1
+Delay(10000)
+
+MouseMove Pos2
+Delay(1000)
+SendKey(82)
+Delay(500)
+Left Click Pos2
+Delay(10000)
+
+Delay(7000)
