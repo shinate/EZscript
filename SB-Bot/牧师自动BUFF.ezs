@@ -18,25 +18,19 @@ pos8=
 [script]
 
 //==== 键位设置 >>> ====
-// Q:清除目标
-var1=81
-// F1
-ExtVar[0]=112
+// A:清除目标
+var1=65
+ExtVar[0]=49
 ExtVar[10]=1000
-// F2
-ExtVar[1]=113
+ExtVar[1]=50
 ExtVar[11]=1000
-// F3
-ExtVar[2]=114
+ExtVar[2]=51
 ExtVar[12]=1000
-// F4
-ExtVar[3]=115
+ExtVar[3]=52
 ExtVar[13]=1000
-// F5
-ExtVar[4]=116
+ExtVar[4]=53
 ExtVar[14]=4000
-// F6
-ExtVar[5]=117
+ExtVar[5]=54
 ExtVar[15]=4000
 ExtVar[6]=0
 ExtVar[16]=0
