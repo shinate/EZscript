@@ -74,7 +74,7 @@ ExtVar[30]=ExtVar[30]-1
 Main:
 Call BuffPosture
 Call BuffXS
-Call HealSingle
+//Call HealSingle
 Call HealGroup
 Call Attack
 Jump Main
