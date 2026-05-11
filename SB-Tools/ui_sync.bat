@@ -69,14 +69,14 @@ if not exist "%SOURCE%" (
 :: ========== 获取源文件信息 ==========
 for %%A in ("%SOURCE%") do (
     set "SOURCE_FILE=%%~nxA"
-    set "SOURCE_TIME=%%~tA"
+    set "SOURCE_SIZE=%%~zA"
 )
 
 echo ========================================
-echo [文件同步工具]
+echo [文件同步工具 - 强制覆盖模式]
 echo 源文件: %SOURCE%
 echo 文件名称: %SOURCE_FILE%
-echo 修改时间: %SOURCE_TIME%
+echo 文件大小: !SOURCE_SIZE! 字节
 echo 目标数量: %DEST_COUNT%
 echo ========================================
 echo.
@@ -94,8 +94,7 @@ for /l %%i in (1,1,%DEST_COUNT%) do (
 :: ========== 显示结果 ==========
 echo.
 echo ========================================
-echo 执行完成！
-echo 成功: %SUCCESS% | 跳过(已同步): %SKIP% | 失败: %FAIL%
+echo 执行完成！ [成功:%SUCCESS%] [跳过:%SKIP%] [失败:%FAIL%]
 echo ========================================
 pause
 exit /b 0
@@ -106,32 +105,26 @@ set "DEST_PATH=%~1"
 
 if "%DEST_PATH%"=="" goto :eof
 
-:: 获取目标目录并创建
+:: 获取目标目录
 for %%A in ("%DEST_PATH%") do set "DEST_DIR=%%~dpA"
+
+:: 检查目标目录是否存在，不存在则跳过
 if not exist "%DEST_DIR%" (
-    echo [创建目录] %DEST_DIR%
-    mkdir "%DEST_DIR%" 2>nul
+    echo [跳过-目录不存在] %DEST_PATH%
+    echo [提示] 目标目录: %DEST_DIR%
+    set /a SKIP+=1
+    goto :eof
 )
 
-:: 检查是否需要复制
-set "NEED_COPY=1"
-if exist "%DEST_PATH%" (
-    for %%A in ("%DEST_PATH%") do set "DEST_TIME=%%~tA"
-    if "!DEST_TIME!"=="!SOURCE_TIME!" (
-        echo [跳过] %DEST_PATH%
-        set /a SKIP+=1
-        set "NEED_COPY="
-    )
+:: 直接覆盖复制（不检查时间）
+copy /y "%SOURCE%" "%DEST_PATH%" >nul 2>&1
+
+if !errorlevel! equ 0 (
+    echo [成功] %DEST_PATH%
+    set /a SUCCESS+=1
+) else (
+    echo [失败] %DEST_PATH%
+    set /a FAIL+=1
 )
 
-if defined NEED_COPY (
-    copy /y "%SOURCE%" "%DEST_PATH%" >nul 2>&1
-    if !errorlevel! equ 0 (
-        echo [成功] %DEST_PATH%
-        set /a SUCCESS+=1
-    ) else (
-        echo [失败] %DEST_PATH%
-        set /a FAIL+=1
-    )
-)
 goto :eof
