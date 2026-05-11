@@ -1,0 +1,46 @@
+[variable]
+var1=4996140
+var2=
+var3=
+var4=
+var5=
+var6=
+var7=
+var8=
+pos1=7014164
+pos2=38732771
+pos3=37946300
+pos4=66323499
+pos5=
+pos6=
+pos7=
+pos8=
+[script]
+SendKey(97) // 
+Delay(10)
+SendKey(112) // 
+Delay(1500)
+SendKey(98) // 
+Delay(10)
+SendKey(112) // 
+Delay(1500)
+Left Click Pos1
+Delay(10)
+SendKey(116) //
+Delay(5500)
+repeat 44 // ¼ÓÑª----------
+SendKey(219) // 
+Delay(10)
+SendKey(188) // 
+Delay(10)
+SendKey(112) // 
+Delay(1200)
+SendKey(113) // 
+Delay(4200)
+SendKey(114) // 
+Delay(4200)
+Left Click Pos2
+Delay(10)
+Left Click Pos3
+Delay(10)
+End repeat // ¼ÓÑª----------
