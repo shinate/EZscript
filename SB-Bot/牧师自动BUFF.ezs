@@ -42,11 +42,20 @@ ExtVar[18]=0
 ExtVar[9]=0
 ExtVar[19]=0
 
+ExtVar[21]=56
+ExtVar[22]=57
+
 Main:
 
 if ExtVar[20] !=0 then
     SendKey(ExtVar[20])
-    Delay(5000)
+    Delay(1500)
+    SendKey(ExtVar[21])
+    Delay(1500)
+    SendKey(ExtVar[21])
+    Delay(1500)
+    SendKey(ExtVar[21])
+    Delay(2000)
 else
     Delay(5000)
     Jump Main
@@ -101,6 +110,8 @@ if ExtVar[9]>0 && ExtVar[19]>0 then
     SendKey(ExtVar[9])
     Delay(ExtVar[19])
 end if
+
+SendKey(ExtVar[22])
 
 Jump Main
 Return
