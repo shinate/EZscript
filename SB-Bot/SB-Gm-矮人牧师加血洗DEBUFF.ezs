@@ -83,6 +83,8 @@ SendKey(ExtVar[9])
 Delay(1000)
 SendKey(ExtVar[6])
 Delay(2000)
+SendKey(ExtVar[6])
+Delay(2000)
 ExtVar[9]=ExtVar[9]+1
 if ExtVar[9]>105 then
 ExtVar[9]=96
