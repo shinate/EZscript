@@ -23,74 +23,57 @@ pos8=
 //==========================
 
 //==== 键位设置 >>> ====
-// C:67 选择目标（NPC）
-ExtVar[0]=67
+// 选择目标（NPC）
+ExtVar[0]=69
 // Q:81选择自己
 ExtVar[1]=81
-// X:88 开/关姿势
+// 开/关姿势
 ExtVar[2]=88
-// F5:116 进攻姿势
-ExtVar[3]=116
-// F6:117 精确姿势
-ExtVar[4]=117
-// F7:118 防御姿势
-ExtVar[5]=118
-// F8:119 正常姿势
-ExtVar[6]=119
-// F12:123 大药
-ExtVar[7]=123
-// F9:120 武神力量
-ExtVar[8]=120
-// F4:115 符石加血
-ExtVar[9]=115
-// F1:112 吸魔
-ExtVar[10]=112
-// F2:113 减抗
-ExtVar[11]=113
-// F3:114 小爆
-ExtVar[12]=114
-// T:84 追踪
-ExtVar[19]=84
+// 选用姿势
+ExtVar[3]=118
+// 武神力量
+ExtVar[4]=114
+// 力量祷告
+ExtVar[5]=115
+// 单加
+ExtVar[6]=113
+// 吸魔
+ExtVar[7]=49
+// 减抗
+ExtVar[8]=50
+// 小爆
+ExtVar[9]=51
+// 追踪
+ExtVar[10]=84
 //==== <<< 键位设置 ====
 
 //==== 时间设置 >>> ====
-//大药持续时间(秒)
-ExtVar[20]=3500
-//姿势持续时间(秒)
-ExtVar[21]=1700
-//武神力量持续时间(秒)
-ExtVar[22]=840
-//吸魔CD时间
-ExtVar[23]=30
+// 姿势 & buff持续时间(秒)
+ExtVar[13]=1700
+// 武神力量持续时间
+ExtVar[15]=840
+// 单加CD
+ExtVar[26]=2500
 //==== <<< 时间设置 ====
 
 //==== 其他设置 >>> ====
-//随机目标，随机1~N个目标，0为关闭(只选择自己)
+// 随机目标，随机1~N个目标，0为关闭(只选择自己)
 ExtVar[30]=5
-//3:进攻姿势, 4:精确姿势, 5:防御姿势, 6:正常姿势
-//默认为正常姿势
-ExtVar[31]=ExtVar[5]
 //==== <<< 其他设置 ====
 
 //==========================
-//初始化
-//大药计时器
-var1=0
-//姿势计时器
-var2=0
-//武神力量计时器
-var3=0
-//吸魔计时器
-var4=0
+// 初始化
+// 姿势计时器
+ExtVar[23]=0
+// 武神力量计时器
+ExtVar[25]=0
 
 ExtVar[30]=ExtVar[30]-1
 
 //==== 主进程 >>> ====
 Main:
-Call BuffMedicine
 Call BuffPosture
 Call BuffSkill
-Call ManaDrain
 Call Attack
 Jump Main
 Return
@@ -98,46 +81,26 @@ Return
 
 //武神力量
 BuffSkill:
-if ExtVar[22]>0 && Time-var3>ExtVar[22] then
-SendKey(ExtVar[8])
-Delay(1000)
-var3=Time
-end if
-Return
-
-//大药
-BuffMedicine:
-if ExtVar[20]>0 && Time-var1>ExtVar[20] then
-SendKey(ExtVar[5])
-Delay(3000)
-SendKey(ExtVar[7])
-Delay(15000)
-SendKey(ExtVar[31])
-Delay(3000)
-var1=Time
+if ExtVar[15]>0 && Time-ExtVar[25]>ExtVar[15] then
+SendKey(ExtVar[4])
+Delay(4000)
+ExtVar[25]=Time
 end if
 Return
 
 //姿势
 BuffPosture:
-if ExtVar[21]>0 && Time-var2>ExtVar[21] then
-SendKey(ExtVar[31])
+if ExtVar[13]>0 && Time-ExtVar[23]>ExtVar[13] then
+SendKey(ExtVar[4])
+Delay(5000)
+SendKey(ExtVar[2])
 Delay(1000)
-var2=Time
-end if
-Return
-
-//吸魔拉怪
-ManaDrain:
-//if ExtVar[23]>0 && Time-var4>ExtVar[23] then
-Call RandomTarget
-SendKey(ExtVar[10])
-Delay(50)
-Call NearlyTarget
-SendKey(ExtVar[10])
+SendKey(ExtVar[3])
 Delay(3000)
-//var4=Time
-//end if
+SendKey(ExtVar[2])
+Delay(1000)
+ExtVar[23]=Time
+end if
 Return
 
 //选择自己
@@ -164,19 +127,33 @@ SendKey(ExtVar[0])
 Delay(50)
 Return
 
+// 单加
+HealSingle:
+if ExtVar[6]>0 then
+Call TargetSelf
+SendKey(ExtVar[6])
+Delay(ExtVar[26])
+end if
+Return
+
 //攻击
 Attack:
-SendKey(ExtVar[19])
+SendKey(ExtVar[10])
 Delay(50)
-SendKey(ExtVar[31])
-Delay(1000)
+// 随机拉怪，闪电
+Call RandomTarget
+SendKey(ExtVar[7])
+Delay(50)
 Call TargetSelf
-SendKey(ExtVar[9])
+SendKey(ExtVar[7])
+Delay(3000)
+// 打
+Repeat 2
+SendKey(ExtVar[8])
 Delay(3000)
 SendKey(ExtVar[9])
-Delay(3000)
-SendKey(ExtVar[11])
-Delay(4000)
-SendKey(ExtVar[12])
 Delay(6000)
+Call HealSingle
+Call HealSingle
+End Repeat
 Return

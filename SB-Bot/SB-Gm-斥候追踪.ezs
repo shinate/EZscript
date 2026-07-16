@@ -45,5 +45,5 @@ Return
 Attack:
 // T
 SendKey(84)
-Delay(10000)
+Delay(8000)
 Return
