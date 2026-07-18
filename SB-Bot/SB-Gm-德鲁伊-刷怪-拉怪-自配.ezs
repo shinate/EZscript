@@ -87,11 +87,11 @@ if ExtVar[13]>0 && Time-ExtVar[23]>ExtVar[13] then
 SendKey(ExtVar[4])
 Delay(5000)
 SendKey(ExtVar[2])
-Delay(1000)
+Delay(2000)
 SendKey(ExtVar[3])
-Delay(3000)
+Delay(2000)
 SendKey(ExtVar[2])
-Delay(1000)
+Delay(2000)
 ExtVar[23]=Time
 end if
 Return

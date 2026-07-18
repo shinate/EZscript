@@ -19,7 +19,7 @@ pos8=
 //==========================
 // F.H.D - 光芒
 // 牧师
-// 2026-05-13
+// 2026-07-19
 //==========================
 
 //==== 键位设置 >>> ====
@@ -37,16 +37,21 @@ ExtVar[4]=113
 ExtVar[5]=114
 // F4:单洗
 ExtVar[6]=115
-// 选择队友 96-105 累加并循环
-ExtVar[9]=97
+// 选择队友（小键盘） 0~9 96-105 累加并循环
+ExtVar[9]=96
 //==== <<< 键位设置 ====
 
 //==== 时间设置 >>> ====
 //姿势 & buff持续时间(秒)
 ExtVar[13]=1700
 //持续加血时间(秒)
-ExtVar[14]=13000
+ExtVar[14]=11000
 //==== <<< 时间设置 ====
+
+//==== 其他设置 >>> ====
+// 队友数量
+ExtVar[19]=10
+//==== <<< 其他设置 ====
 
 //==========================
 //初始化
@@ -54,6 +59,7 @@ ExtVar[14]=13000
 ExtVar[23]=0
 //持续加血计时器
 ExtVar[24]=0
+ExtVar[29]=ExtVar[9]+ExtVar[19]
 
 //==== 主进程 >>> ====
 Main:
@@ -68,11 +74,11 @@ Return
 BuffPosture:
 if ExtVar[13]>0 && Time-ExtVar[23]>ExtVar[13] then
 SendKey(ExtVar[2])
-Delay(1000)
+Delay(2000)
 SendKey(ExtVar[3])
-Delay(3000)
+Delay(2000)
 SendKey(ExtVar[2])
-Delay(1000)
+Delay(2000)
 ExtVar[23]=Time
 end if
 Return
@@ -81,12 +87,12 @@ Return
 ClearCurse:
 SendKey(ExtVar[9])
 Delay(1000)
+Repeat 3:
 SendKey(ExtVar[6])
 Delay(2000)
-SendKey(ExtVar[6])
-Delay(2000)
+End Repeat
 ExtVar[9]=ExtVar[9]+1
-if ExtVar[9]>105 then
+if ExtVar[9]>ExtVar[29]-1 then
 ExtVar[9]=96
 end if
 Return
