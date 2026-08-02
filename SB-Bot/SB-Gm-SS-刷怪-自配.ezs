@@ -1,0 +1,160 @@
+[variable]
+var1=
+var2=
+var3=
+var4=
+var5=
+var6=
+var7=
+var8=
+pos1=
+pos2=
+pos3=
+pos4=
+pos5=
+pos6=
+pos7=
+pos8=
+[script]
+//==========================
+// F.H.D - 光芒
+// 术士
+// 2026-07-22
+//==========================
+
+//==== 键位设置 >>> ====
+// 选择目标（NPC）
+ExtVar[0]=69
+// Q:81选择自己
+ExtVar[1]=81
+// 开/关姿势
+ExtVar[2]=88
+// 选用姿势
+ExtVar[3]=116
+// 自身buff1
+ExtVar[4]=114
+// 自身buff2
+ExtVar[5]=-1
+// -抗
+ExtVar[6]=50
+// 单魔1
+ExtVar[7]=51
+// 单魔2
+ExtVar[8]=52
+//==== <<< 键位设置 ====
+
+//==== 时间设置 >>> ====
+// 姿势
+ExtVar[13]=2000
+ExtVar[23]=1700
+// buff1
+ExtVar[14]=4000
+ExtVar[24]=600
+// buff2
+ExtVar[15]=0
+ExtVar[25]=0
+// -抗
+ExtVar[16]=2000
+ExtVar[26]=20
+// 单魔1
+ExtVar[17]=2000
+ExtVar[27]=1
+// 单魔2
+ExtVar[18]=500
+ExtVar[28]=3
+//==== <<< 时间设置 ====
+
+//==== 其他设置 >>> ====
+//==== <<< 其他设置 ====
+
+//==========================
+// 初始化
+// 姿势计时器
+ExtVar[33]=0
+// buff1 计时器
+ExtVar[34]=0
+// buff2 计时器
+ExtVar[35]=0
+// -抗 计时器
+ExtVar[36]=0
+// 攻击2 计时器
+ExtVar[38]=0
+
+//==== 主进程 >>> ====
+Main:
+Call BuffPosture
+Call Buff1
+Call Buff2
+Call NearlyTarget
+Call Debuff
+Call Attack1
+Call Attack2
+Jump Main
+Return
+//==== <<< 主进程 ====
+
+//姿势
+BuffPosture:
+if ExtVar[3]>0 && Time-ExtVar[33]>ExtVar[23] then
+SendKey(ExtVar[2])
+Delay(2000)
+SendKey(ExtVar[3])
+Delay(ExtVar[13])
+SendKey(ExtVar[2])
+Delay(2000)
+ExtVar[33]=Time
+end if
+Return
+
+Buff1:
+if ExtVar[4]>0 && Time-ExtVar[34]>ExtVar[24] then
+SendKey(ExtVar[4])
+Delay(ExtVar[14])
+ExtVar[34]=Time
+end if
+Return
+
+Buff2:
+if ExtVar[5]>0 && Time-ExtVar[35]>ExtVar[25] then
+SendKey(ExtVar[5])
+Delay(ExtVar[15])
+ExtVar[35]=Time
+end if
+Return
+
+//选择自己
+TargetSelf:
+SendKey(ExtVar[1])
+Delay(500)
+Return
+
+//就近目标
+NearlyTarget:
+Call TargetSelf
+SendKey(ExtVar[0])
+Delay(500)
+Return
+
+Debuff:
+if ExtVar[6]>0 && Time-ExtVar[36]>ExtVar[26] then
+SendKey(ExtVar[6])
+Delay(ExtVar[16])
+ExtVar[36]=Time
+end if
+Return
+
+//攻击1
+Attack1:
+if ExtVar[7]>0 then
+SendKey(ExtVar[7])
+Delay(ExtVar[17])
+end if
+Return
+
+//攻击2
+Attack2:
+if ExtVar[8]>0 && Time-ExtVar[38]>ExtVar[28] then
+SendKey(ExtVar[8])
+Delay(ExtVar[18])
+end if
+Return
