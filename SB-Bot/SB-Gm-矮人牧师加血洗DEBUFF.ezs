@@ -19,7 +19,7 @@ pos8=
 //==========================
 // F.H.D - 光芒
 // 牧师
-// 2026-07-19
+// 2026-08-04
 //==========================
 
 //==== 键位设置 >>> ====
@@ -37,6 +37,8 @@ ExtVar[4]=113
 ExtVar[5]=114
 // F4:单洗
 ExtVar[6]=115
+// 4:15秒单晕 45秒免疫
+ExtVar[7]=52
 // 选择队友（小键盘） 0~9 96-105 累加并循环
 ExtVar[9]=96
 //==== <<< 键位设置 ====
@@ -45,7 +47,11 @@ ExtVar[9]=96
 //姿势 & buff持续时间(秒)
 ExtVar[13]=1700
 //持续加血时间(秒)
-ExtVar[14]=11000
+ExtVar[14]=25
+//单洗持续时间
+ExtVar[16]=10
+//单晕持续时间
+ExtVar[17]=30
 //==== <<< 时间设置 ====
 
 //==== 其他设置 >>> ====
@@ -59,13 +65,19 @@ ExtVar[19]=10
 ExtVar[23]=0
 //持续加血计时器
 ExtVar[24]=0
+//单洗计时器
+ExtVar[26]=0
+//单晕计时器
+ExtVar[27]=0
 ExtVar[29]=ExtVar[9]+ExtVar[19]
 
 //==== 主进程 >>> ====
 Main:
 Call BuffPosture
+Call MianYun
 Call ClearCurse
 Call Attack
+Delay(1000)
 Jump Main
 Return
 //==== <<< 主进程 ====
@@ -85,15 +97,27 @@ Return
 
 //洗诅咒
 ClearCurse:
+if ExtVar[16]>0 && Time-ExtVar[26]>ExtVar[16] then
 SendKey(ExtVar[9])
-Delay(1000)
-Repeat 3:
+Delay(50)
+Repeat 2:
 SendKey(ExtVar[6])
 Delay(2000)
 End Repeat
 ExtVar[9]=ExtVar[9]+1
 if ExtVar[9]>ExtVar[29]-1 then
 ExtVar[9]=96
+end if
+ExtVar[26]=Time
+end if
+Return
+
+MianYun:
+if ExtVar[17]>0 && Time-ExtVar[27]>ExtVar[17] then
+Call TargetSelf
+SendKey(ExtVar[7])
+Delay(1000)
+ExtVar[27]=Time
 end if
 Return
 
@@ -105,10 +129,12 @@ Return
 
 //默认循环流程
 Attack:
+if ExtVar[14]>0 && Time-ExtVar[24]>ExtVar[14] then
 Call TargetSelf
 SendKey(ExtVar[4])
-Delay(4000)
+Delay(3000)
 SendKey(ExtVar[5])
 Delay(5000)
-Delay(ExtVar[14])
+ExtVar[24]=Time
+end if
 Return

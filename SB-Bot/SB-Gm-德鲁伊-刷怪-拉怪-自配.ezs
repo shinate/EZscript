@@ -31,8 +31,8 @@ ExtVar[1]=81
 ExtVar[2]=88
 // Ñ¡ÓÃ×ËÊÆ
 ExtVar[3]=116
-// ´ÔÁÖ×£¸£
-ExtVar[4]=114
+// ×£¸£ 113,114
+ExtVar[4]=113
 // ÏðÊ÷Æ¤·ô
 ExtVar[5]=115
 // µ¥¼Ó
@@ -84,8 +84,11 @@ Return
 //×ËÊÆ
 BuffPosture:
 if ExtVar[13]>0 && Time-ExtVar[23]>ExtVar[13] then
+Call TargetSelf
 SendKey(ExtVar[4])
-Delay(5000)
+Delay(1000)
+SendKey(ExtVar[4]+1)
+Delay(4000)
 SendKey(ExtVar[2])
 Delay(2000)
 SendKey(ExtVar[3])
