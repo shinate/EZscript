@@ -1,0 +1,178 @@
+[variable]
+var1=
+var2=
+var3=
+var4=
+var5=
+var6=
+var7=
+var8=
+pos1=
+pos2=
+pos3=
+pos4=
+pos5=
+pos6=
+pos7=
+pos8=
+[script]
+//==========================
+// F.H.D - 光芒
+// 德鲁伊(高防)
+// 2026-09-19
+//==========================
+
+//==== 键位设置 >>> ====
+// 选择目标（NPC）
+ExtVar[0]=69
+// Q:81选择自己
+ExtVar[1]=81
+// 选用姿势
+ExtVar[2]=116
+// 群拉怪
+ExtVar[3]=53
+// 换钱
+ExtVar[4]=54
+// 丛林祝福
+ExtVar[5]=114
+// 橡树皮肤
+ExtVar[6]=115
+// 单加
+ExtVar[7]=51
+// 召唤闪电
+ExtVar[8]=49
+// 地震
+ExtVar[9]=50
+// 追踪
+ExtVar[10]=84
+//==== <<< 键位设置 ====
+
+//==== 时间设置 >>> ====
+// 姿势 & buff
+ExtVar[12]=1000
+ExtVar[22]=1700
+// 拉怪
+ExtVar[13]=1000
+ExtVar[23]=40
+// 丛林祝福
+ExtVar[15]=4000
+// 橡树皮肤
+ExtVar[16]=1000
+ExtVar[26]=300
+// 单加
+ExtVar[17]=4000
+// 召唤闪电
+ExtVar[18]=6000
+// 地震
+ExtVar[19]=7000
+//==== <<< 时间设置 ====
+
+//==== 其他设置 >>> ====
+// 随机目标，随机1~N个目标，0为关闭(只选择自己)
+ExtVar[40]=0
+//==== <<< 其他设置 ====
+
+//==========================
+// 初始化
+// 姿势计时器
+ExtVar[32]=0
+// 拉怪计时器
+ExtVar[33]=0
+// 橡树皮肤计时器
+ExtVar[36]=0
+
+ExtVar[40]=ExtVar[40]-1
+
+//==== 主进程 >>> ====
+Main:
+Call BuffXS
+Call BuffPosture
+Call HealSingle
+Call YTLa
+Call Attack
+Jump Main
+Return
+//==== <<< 主进程 ====
+
+//姿势
+BuffPosture:
+if ExtVar[22]>0 && Time-ExtVar[32]>ExtVar[22] then
+Call TargetSelf
+SendKey(ExtVar[5])
+Delay(ExtVar[15])
+SendKey(ExtVar[2])
+Delay(ExtVar[12])
+ExtVar[32]=Time
+end if
+Return
+
+//橡树皮肤
+BuffXS:
+if ExtVar[26]>0 && Time-ExtVar[36]>ExtVar[26] then
+SendKey(ExtVar[6])
+Delay(ExtVar[16])
+ExtVar[36]=Time
+end if
+Return
+
+//选择自己
+TargetSelf:
+SendKey(ExtVar[1])
+Delay(50)
+Return
+
+//随机目标
+RandomTarget:
+if ExtVar[40]>-1 then
+Repeat Rand[ExtVar[40]]+1
+SendKey(ExtVar[0])
+Delay(50)
+End Repeat
+end if
+Return
+
+//就近目标
+NearlyTarget:
+SendKey(ExtVar[1])
+Delay(50)
+SendKey(ExtVar[0])
+Delay(50)
+Return
+
+//单加
+HealSingle:
+if ExtVar[7]>0 then
+Call TargetSelf
+SendKey(ExtVar[7])
+Delay(ExtVar[17])
+end if
+Return
+
+YTLa:
+if ExtVar[23]>0 && Time-ExtVar[33]>ExtVar[23] then
+SendKey(ExtVar[3])
+Delay(ExtVar[13])
+ExtVar[33]=Time
+end if
+Return
+
+//攻击
+Attack:
+SendKey(54)
+Delay(500)
+SendKey(ExtVar[10])
+Delay(50)
+// 随机拉怪，闪电
+if ExtVar[40]>-1 then
+Call RandomTarget
+SendKey(ExtVar[8])
+Delay(50)
+end if
+Call TargetSelf
+SendKey(ExtVar[8])
+Delay(ExtVar[18])
+// 地震
+Call TargetSelf
+SendKey(ExtVar[9])
+Delay(ExtVar[19])
+Return
